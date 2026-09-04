@@ -1,4 +1,4 @@
-# wiki
+# OSUSat Wiki
 Knowledge base website for OSUSat
 
 A static site, styled with [Tailwind CSS](https://tailwindcss.com) + [daisyUI](https://daisyui.com)
