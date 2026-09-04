@@ -1,0 +1,1647 @@
+<!doctype html>
+<html lang="en" data-theme="dim" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Contributor Manual &middot; OSUSat Wiki</title>
+        <meta
+            name="description"
+            content="Official engineering manual and contributor guidelines for the OSUSat CubeSat program."
+        />
+        <link
+            rel="icon"
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛰️</text></svg>"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link
+            href="https://cdn.jsdelivr.net/npm/daisyui@4/dist/full.min.css"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <style>
+            :root,
+            [data-theme="dim"] {
+                --b1: 224 35% 3%;
+                --b2: 224 40% 2%;
+                --b3: 224 25% 10%;
+                --bc: 215 20% 90%;
+            }
+
+            body {
+                font-family:
+                    "Inter",
+                    ui-sans-serif,
+                    system-ui,
+                    -apple-system,
+                    sans-serif;
+                -webkit-font-smoothing: antialiased;
+                background-color: #030509 !important;
+                color: #cbd5e1;
+            }
+            code,
+            pre,
+            .mockup-code,
+            .step-badge,
+            .font-mono {
+                font-family: "JetBrains Mono", ui-monospace, monospace;
+            }
+            section[id] {
+                scroll-margin-top: 5rem;
+            }
+
+            /* Reading progress top bar - clean silver/slate indicator */
+            #scroll-progress-bar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 2px;
+                background: #94a3b8;
+                z-index: 50;
+                width: 0%;
+                transition: width 0.1s ease-out;
+            }
+
+            .doc-control-block {
+                background: #080c16;
+                border: 1px solid #161e33;
+                border-radius: 0.75rem;
+            }
+
+            .doc-card {
+                background: #080c16;
+                border: 1px solid #161e33;
+            }
+
+            /* Code block terminal frame - pitch dark obsidian */
+            .terminal-frame {
+                background-color: #050711;
+                border: 1px solid #161e33;
+                border-radius: 0.5rem;
+                overflow: hidden;
+                margin-top: 0.75rem;
+                margin-bottom: 1.25rem;
+            }
+            [data-theme="nord"] .terminal-frame {
+                background-color: #1e293b;
+                border-color: #cbd5e1;
+                color: #f8fafc;
+            }
+
+            .terminal-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0.4rem 0.75rem;
+                background: rgba(0, 0, 0, 0.4);
+                border-bottom: 1px solid #161e33;
+                font-size: 0.72rem;
+                font-family: "JetBrains Mono", monospace;
+                color: #64748b;
+            }
+
+            code.mono-inline {
+                background: #0d1220;
+                color: #e2e8f0;
+                border: 1px solid #1e293b;
+                padding: 0.1em 0.4em;
+                border-radius: 0.25rem;
+                font-size: 0.85em;
+            }
+
+            .section-num {
+                font-size: 0.72rem;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: #64748b;
+                font-weight: 600;
+                font-family: "JetBrains Mono", monospace;
+            }
+
+            /* Formal Callout Box */
+            .callout-box {
+                background: #080c16;
+                border: 1px solid #161e33;
+                border-left: 3px solid #64748b;
+                padding: 0.85rem 1rem;
+                border-radius: 0.5rem;
+            }
+            .callout-important {
+                border-left-color: #f59e0b;
+            }
+
+            /* Sidebar Active Highlight */
+            .toc-link.active {
+                background: rgba(255, 255, 255, 0.05);
+                color: #f8fafc;
+                font-weight: 600;
+                border-left: 2px solid #94a3b8;
+            }
+
+            [data-theme="nord"] body {
+                background-color: #f8fafc !important;
+                color: #0f172a;
+            }
+            [data-theme="nord"] .doc-control-block,
+            [data-theme="nord"] .doc-card {
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+            }
+        </style>
+    </head>
+    <body class="min-h-screen antialiased">
+        <!-- Reading Progress Bar -->
+        <div id="scroll-progress-bar"></div>
+
+        <div class="drawer lg:drawer-open">
+            <input id="toc-drawer" type="checkbox" class="drawer-toggle" />
+
+            <div class="drawer-content flex flex-col min-w-0">
+                <!-- Top Navbar -->
+                <header
+                    class="navbar bg-[#080c16]/90 backdrop-blur-md border-b border-[#161e33] sticky top-0 z-30 px-4 lg:px-8"
+                >
+                    <div class="flex-none lg:hidden">
+                        <label
+                            for="toc-drawer"
+                            class="btn btn-square btn-ghost btn-sm text-slate-400"
+                            aria-label="Toggle menu"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16"
+                                />
+                            </svg>
+                        </label>
+                    </div>
+                    <div class="flex-1 items-center gap-3">
+                        <a
+                            href="../index.html"
+                            class="flex items-center gap-2.5"
+                        >
+                            <span
+                                class="font-bold text-slate-100 tracking-tight text-base sm:text-lg"
+                                >OSUSat Wiki</span
+                            >
+                        </a>
+                    </div>
+                    <div class="flex-none flex items-center gap-3">
+                        <a
+                            href="https://github.com/OSUSat/cubesat"
+                            target="_blank"
+                            rel="noopener"
+                            class="btn btn-ghost btn-sm gap-2 font-mono text-xs text-slate-400 hover:text-slate-200 hidden sm:inline-flex"
+                        >
+                            <span>cubesat repo</span>
+                        </a>
+                    </div>
+                </header>
+
+                <!-- Main Content Area -->
+                <main
+                    class="max-w-3xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10"
+                >
+                    <!-- Formal Document Control Header Block -->
+                    <header class="doc-control-block p-6 mb-12">
+                        <h1
+                            class="text-2xl sm:text-3xl font-extrabold text-slate-100 tracking-tight mb-2"
+                        >
+                            OSUSat Contributor Manual &amp; Engineering
+                            Guidelines
+                        </h1>
+                        <p
+                            class="text-xs sm:text-sm text-slate-400 leading-relaxed"
+                        >
+                            Procedures, hardware & firmware design, toolchain
+                            requirements, submodules, design reviews, and
+                            contribution protocol
+                        </p>
+
+                        <!-- Quick Navigation Bar -->
+                        <div
+                            class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-6 pt-4 border-t border-slate-800"
+                        >
+                            <a
+                                href="#orient"
+                                class="doc-card p-2.5 rounded-lg hover:border-slate-600 transition-all text-left"
+                            >
+                                <div
+                                    class="text-[10px] font-mono text-slate-500 mb-0.5"
+                                >
+                                    Section 1
+                                </div>
+                                <div
+                                    class="text-xs font-semibold text-slate-200"
+                                >
+                                    Monorepo Tree
+                                </div>
+                            </a>
+                            <a
+                                href="#setup"
+                                class="doc-card p-2.5 rounded-lg hover:border-slate-600 transition-all text-left"
+                            >
+                                <div
+                                    class="text-[10px] font-mono text-slate-500 mb-0.5"
+                                >
+                                    Section 2
+                                </div>
+                                <div
+                                    class="text-xs font-semibold text-slate-200"
+                                >
+                                    Clone & Build
+                                </div>
+                            </a>
+                            <a
+                                href="#lifecycle"
+                                class="doc-card p-2.5 rounded-lg hover:border-slate-600 transition-all text-left"
+                            >
+                                <div
+                                    class="text-[10px] font-mono text-slate-500 mb-0.5"
+                                >
+                                    Section 4
+                                </div>
+                                <div
+                                    class="text-xs font-semibold text-slate-200"
+                                >
+                                    Design Reviews
+                                </div>
+                            </a>
+                            <a
+                                href="#hardware"
+                                class="doc-card p-2.5 rounded-lg hover:border-slate-600 transition-all text-left"
+                            >
+                                <div
+                                    class="text-[10px] font-mono text-slate-500 mb-0.5"
+                                >
+                                    Section 9
+                                </div>
+                                <div
+                                    class="text-xs font-semibold text-slate-200"
+                                >
+                                    HW & FW Specs
+                                </div>
+                            </a>
+                        </div>
+                    </header>
+
+                    <section id="orient" class="mb-14">
+                        <p class="section-num mb-1">
+                            Section 1: Orientation &amp; Repository Architecture
+                        </p>
+                        <h2
+                            class="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight mb-3"
+                        >
+                            What this repository contains
+                        </h2>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-6">
+                            OSUSat is a student-built, open-source Earth-imaging
+                            CubeSat. This monorepo holds every subsystem's
+                            hardware (<code class="mono-inline">KiCad</code>)
+                            and firmware (<code class="mono-inline"
+                                >C, CMake</code
+                            >) in one place, plus the process documents that
+                            control how changes are made.
+                        </p>
+
+                        <!-- Subsystems Grid -->
+                        <div
+                            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mb-6"
+                        >
+                            <div
+                                class="p-3 rounded-lg bg-[#080c16] border border-slate-800"
+                            >
+                                <div
+                                    class="font-bold text-sm mb-1 flex items-center justify-between"
+                                >
+                                    <span class="text-slate-200">EPS</span>
+                                </div>
+                                <p class="text-xs text-slate-400">
+                                    Electrical Power System: solar charging,
+                                    battery management, power distribution &
+                                    protection, power profile decision making.
+                                </p>
+                            </div>
+                            <div
+                                class="p-3 rounded-lg bg-[#080c16] border border-slate-800"
+                            >
+                                <div
+                                    class="font-bold text-sm mb-1 flex items-center justify-between"
+                                >
+                                    <span class="text-slate-200">OBC</span>
+                                </div>
+                                <p class="text-xs text-slate-400">
+                                    On-Board Computer: command & telemetry
+                                    management, GNC logic, image downlink,
+                                    experiment processing.
+                                </p>
+                            </div>
+                            <div
+                                class="p-3 rounded-lg bg-[#080c16] border border-slate-800"
+                            >
+                                <div
+                                    class="font-bold text-sm mb-1 flex items-center justify-between"
+                                >
+                                    <span class="text-slate-200">Payload</span>
+                                </div>
+                                <p class="text-xs text-slate-400">
+                                    Science & Optics: dual-camera imaging
+                                    controller & high-speed data capture.
+                                </p>
+                            </div>
+                            <div
+                                class="p-3 rounded-lg bg-[#080c16] border border-slate-800"
+                            >
+                                <div
+                                    class="font-bold text-sm mb-1 flex items-center justify-between"
+                                >
+                                    <span class="text-slate-200">ADCS</span>
+                                </div>
+                                <p class="text-xs text-slate-400">
+                                    Attitude Control: magnetorquers, orientation
+                                    sensors, and algorithms.
+                                </p>
+                            </div>
+                            <div
+                                class="p-3 rounded-lg bg-[#080c16] border border-slate-800"
+                            >
+                                <div
+                                    class="font-bold text-sm mb-1 flex items-center justify-between"
+                                >
+                                    <span class="text-slate-200">Comms</span>
+                                </div>
+                                <p class="text-xs text-slate-400">
+                                    Radio Comms: UHF transceiver for ground
+                                    station communication & downlink.
+                                </p>
+                            </div>
+                            <div
+                                class="p-3 rounded-lg bg-[#080c16] border border-slate-800"
+                            >
+                                <div
+                                    class="font-bold text-sm mb-1 flex items-center justify-between"
+                                >
+                                    <span class="text-slate-200"
+                                        >Backplane</span
+                                    >
+                                </div>
+                                <p class="text-xs text-slate-400">
+                                    PCB with connectors, power, and signals
+                                    routed between boards, as well as the keying
+                                    spec and pinout ICDs.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Directory Structure Code Mockup -->
+                        <div class="terminal-frame">
+                            <div class="terminal-header">
+                                <span>Repository Layout</span>
+                                <span class="text-slate-500">tree</span>
+                            </div>
+                            <pre
+                                class="p-4 text-xs font-mono overflow-x-auto leading-relaxed text-slate-300"
+                            >
+.github/                  # Issue + PR templates, CI workflow
+adcs/ eps/ obc/ payload/ comms/
+  v1/firmware/            # CMake, CUnit host-side tests, HAL hardware mocks
+  v1/hardware/            # KiCad schematic (.kicad_sch) & layout (.kicad_pcb)
+  documentation/          # Subsystem info doc, trade studies, design reviews
+backplane/                # Shared connector standard, keying scheme
+shared/kicad/footprints/  # OSUSAT_* .pretty footprint libraries, 3D models, design rules
+documentation/
+  design_guidelines/      # Rules: schematic/layout standards, HAL policy, event-driven pattern
+  checklists/             # Review checklists: schematic, layout, firmware, bring-up
+  templates/              # ICD, ATPs
+  icd/                    # Contains ICDs
+  atp/                    # Contains ATPs
+  process/                # Documents for controlling work throughout its lifecycle</pre
+                            >
+                        </div>
+
+                        <div
+                            class="callout-box text-xs sm:text-sm text-slate-300"
+                        >
+                            <strong class="text-slate-200 block mb-0.5"
+                                >NOTE:</strong
+                            >
+                            Read the
+                            <code class="mono-inline">README.md</code> for
+                            mission context and system architecture diagram
+                            before doing any work.
+                        </div>
+                    </section>
+
+                    <div class="divider opacity-30"></div>
+
+                    <section id="setup" class="mb-14">
+                        <p class="section-num mb-1">
+                            Section 2: Toolchain Setup &amp; Build Verification
+                        </p>
+                        <h2
+                            class="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight mb-4"
+                        >
+                            Set up the repo on your local machine
+                        </h2>
+
+                        <div class="space-y-5">
+                            <!-- Step 1 -->
+                            <div class="flex gap-4 items-start">
+                                <div
+                                    class="w-7 h-7 rounded-full border border-slate-700 text-slate-300 font-mono text-xs flex items-center justify-center font-bold flex-shrink-0 mt-0.5 bg-slate-800/40"
+                                >
+                                    1
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h4
+                                        class="font-bold text-sm sm:text-base text-slate-200 mb-1"
+                                    >
+                                        Clone with submodules
+                                    </h4>
+                                    <p
+                                        class="text-xs sm:text-sm text-slate-400 mb-2"
+                                    >
+                                        The repo pulls in
+                                        <code class="mono-inline"
+                                            >osusat/core</code
+                                        >
+                                        and
+                                        <code class="mono-inline"
+                                            >osusat/messaging</code
+                                        >
+                                        as submodules.
+                                    </p>
+                                    <div class="terminal-frame my-0">
+                                        <div class="terminal-header">
+                                            <span
+                                                >bash &mdash; submodule
+                                                clone</span
+                                            >
+                                        </div>
+                                        <pre
+                                            class="p-3 text-xs font-mono text-slate-300"
+                                        ><span class="text-slate-500 font-bold">$</span> git clone --recurse-submodules git@github.com:OSUSat/cubesat.git
+
+<span class="text-slate-600"># if you already cloned without submodules, you can bring them in</span>
+<span class="text-slate-500 font-bold">$</span> git submodule update --init --recursive</pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="flex gap-4 items-start">
+                                <div
+                                    class="w-7 h-7 rounded-full border border-slate-700 text-slate-300 font-mono text-xs flex items-center justify-center font-bold flex-shrink-0 mt-0.5 bg-slate-800/40"
+                                >
+                                    2
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h4
+                                        class="font-bold text-sm sm:text-base text-slate-200 mb-1"
+                                    >
+                                        Install the firmware toolchain
+                                    </h4>
+                                    <p
+                                        class="text-xs sm:text-sm text-slate-400"
+                                    >
+                                        Needed for any
+                                        <code class="mono-inline"
+                                            >*/v1/firmware</code
+                                        >
+                                        work:
+                                        <code class="mono-inline"
+                                            >gcc-arm-none-eabi</code
+                                        >,
+                                        <code class="mono-inline">cmake</code>,
+                                        <code class="mono-inline">make</code>,
+                                        <code class="mono-inline">g++</code>,
+                                        plus
+                                        <code class="mono-inline">doxygen</code>
+                                        and Python 3 +
+                                        <code class="mono-inline">sphinx</code>
+                                        for docs generation.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="flex gap-4 items-start">
+                                <div
+                                    class="w-7 h-7 rounded-full border border-slate-700 text-slate-300 font-mono text-xs flex items-center justify-center font-bold flex-shrink-0 mt-0.5 bg-slate-800/40"
+                                >
+                                    3
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h4
+                                        class="font-bold text-sm sm:text-base text-slate-200 mb-1"
+                                    >
+                                        Build and test one subsystem
+                                    </h4>
+                                    <div class="terminal-frame my-0">
+                                        <div class="terminal-header">
+                                            <span
+                                                >bash &mdash; build EPS host
+                                                tests</span
+                                            >
+                                        </div>
+                                        <pre
+                                            class="p-3 text-xs font-mono text-slate-300"
+                                        ><span class="text-slate-500 font-bold">$</span> cd eps/v1/firmware
+<span class="text-slate-500 font-bold">$</span> cmake -B build_hitl -S . -DTARGET_ARCH=HOST -DBUILD_HITL=ON
+<span class="text-slate-500 font-bold">$</span> cmake --build build_hitl
+<span class="text-slate-500 font-bold">$</span> cd build_hitl && ctest --output-on-failure</pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 4 -->
+                            <div class="flex gap-4 items-start">
+                                <div
+                                    class="w-7 h-7 rounded-full border border-slate-700 text-slate-300 font-mono text-xs flex items-center justify-center font-bold flex-shrink-0 mt-0.5 bg-slate-800/40"
+                                >
+                                    4
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h4
+                                        class="font-bold text-sm sm:text-base text-slate-200 mb-1"
+                                    >
+                                        Open hardware in KiCad
+                                    </h4>
+                                    <p
+                                        class="text-xs sm:text-sm text-slate-400 leading-relaxed"
+                                    >
+                                        Every board's
+                                        <code class="mono-inline"
+                                            >fp-lib-table</code
+                                        >
+                                        points at
+                                        <code class="mono-inline"
+                                            >shared/kicad/footprints/OSUSAT_*.pretty</code
+                                        >
+                                        via a relative
+                                        <code class="mono-inline"
+                                            >${KIPRJMOD}/../../...</code
+                                        >
+                                        path. You must open the
+                                        <code class="mono-inline"
+                                            >.kicad_pro</code
+                                        >
+                                        from inside its own folder so that path
+                                        resolves. Don't drop new part footprints
+                                        into a subsystem specific folder,
+                                        instead adding them to the shared
+                                        <code class="mono-inline">.pretty</code>
+                                        library so every subsystem can reuse
+                                        them.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="divider opacity-30"></div>
+
+                    <section id="find-work" class="mb-14">
+                        <p class="section-num mb-1">
+                            Section 3: Issue Tracking &amp; Flatsat GitHub
+                            Project
+                        </p>
+                        <h2
+                            class="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight mb-3"
+                        >
+                            Find something to work on
+                        </h2>
+
+                        <p>
+                            <strong
+                                class="text-sm text-slate-300 leading-relaxed mb-4"
+                            >
+                                The program uses GitHub Issues for tracking work
+                                throughout its full lifecycle. Work must be
+                                encapsulated by an issue before it
+                                starts.</strong
+                            >
+                            Status is tracked on the
+                            <a
+                                class="link font-medium text-slate-200 underline"
+                                href="https://github.com/orgs/OSUSat/projects/1"
+                                target="_blank"
+                                rel="noopener"
+                                >OSUSat CubeSat FlatSat project board.</a
+                            >
+                        </p>
+
+                        <h3
+                            class="text-xs font-bold font-mono uppercase tracking-wider text-slate-400 mb-2 mt-4"
+                        >
+                            Picking something up
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-400 mb-4">
+                            Cards in the <strong>Ready</strong> tab are cleared
+                            to start and unclaimed. Once you pick something,
+                            assign yourself and comment your intent before
+                            starting.
+                        </p>
+
+                        <h3
+                            class="text-xs font-bold font-mono uppercase tracking-wider text-slate-400 mb-2"
+                        >
+                            Labels
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-400">
+                            Issues are also labeled by type:
+                            <code class="mono-inline">design-review</code>,
+                            <code class="mono-inline">bug</code>,
+                            <code class="mono-inline">enhancement</code>,
+                            <code class="mono-inline">documentation</code>,
+                            <code class="mono-inline">good first issue</code>,
+                            <code class="mono-inline">help wanted</code>. You
+                            can filter by them from the label picker on the
+                            Issues tab. If you're new to the project, look for
+                            issues labeled
+                            <code class="mono-inline">good first issue</code>.
+                            These issues are suitable for members with low
+                            experience or those just getting involved.
+                        </p>
+                    </section>
+
+                    <div class="divider opacity-30"></div>
+
+                    <section id="lifecycle" class="mb-14">
+                        <p class="section-num mb-1">
+                            Section 4: The Lifecycle of Work
+                        </p>
+                        <h2
+                            class="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight mb-3"
+                        >
+                            The life of a change
+                        </h2>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-6">
+                            Every hardware or firmware change must follow the
+                            same process from review to release.
+                        </p>
+
+                        <!-- 5 Steps -->
+                        <div class="space-y-4">
+                            <div class="flex gap-4 items-start">
+                                <div
+                                    class="w-7 h-7 rounded-full border border-slate-700 text-slate-300 font-mono text-xs flex items-center justify-center font-bold flex-shrink-0 mt-0.5 bg-slate-800/40"
+                                >
+                                    1
+                                </div>
+                                <div>
+                                    <h4
+                                        class="font-bold text-sm sm:text-base text-slate-200 mb-1"
+                                    >
+                                        Open a Design Review issue
+                                        <em>before</em> doing work
+                                    </h4>
+                                    <p
+                                        class="text-xs sm:text-sm text-slate-400 leading-relaxed"
+                                    >
+                                        Use the
+                                        <strong>Design Review Request</strong>
+                                        issue template. It forces you to name
+                                        the subsystem, the requirement it
+                                        satisfies, description of the work, open
+                                        questions, and more such as
+                                        part-tradeoffs up front. Additionally,
+                                        as you work, ensure that you create
+                                        sub-issues to encapsulate sub-tasks so
+                                        the work becomes easier to reason about.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 items-start">
+                                <div
+                                    class="w-7 h-7 rounded-full border border-slate-700 text-slate-300 font-mono text-xs flex items-center justify-center font-bold flex-shrink-0 mt-0.5 bg-slate-800/40"
+                                >
+                                    2
+                                </div>
+                                <div>
+                                    <h4
+                                        class="font-bold text-sm sm:text-base text-slate-200 mb-1"
+                                    >
+                                        Get it cleared to proceed
+                                    </h4>
+                                    <p
+                                        class="text-xs sm:text-sm text-slate-400 leading-relaxed"
+                                    >
+                                        After opening a design review issue,
+                                        request a reviewer to look over your
+                                        proposed changes before proceeding.
+                                        Larger issues may require one or more
+                                        meetings to sort out concerns,
+                                        interactions with other subsystems, or
+                                        mechanical constraints. After an issue
+                                        is cleared to proceed by a reviewer,
+                                        work can begin.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 items-start">
+                                <div
+                                    class="w-7 h-7 rounded-full border border-slate-700 text-slate-300 font-mono text-xs flex items-center justify-center font-bold flex-shrink-0 mt-0.5 bg-slate-800/40"
+                                >
+                                    3
+                                </div>
+                                <div>
+                                    <h4
+                                        class="font-bold text-sm sm:text-base text-slate-200 mb-1"
+                                    >
+                                        Do the work, following the design
+                                        guidelines
+                                    </h4>
+                                    <p
+                                        class="text-xs sm:text-sm text-slate-400 leading-relaxed"
+                                    >
+                                        Hardware:
+                                        <a
+                                            class="link"
+                                            href="https://github.com/OSUSat/cubesat/blob/main/documentation/design_guidelines/schematic_layout_design.md"
+                                            >Schematic &amp; Layout Design
+                                            guidelines</a
+                                        >
+                                        and
+                                        <a
+                                            class="link"
+                                            href="https://github.com/OSUSat/cubesat/blob/main/documentation/design_guidelines/preliminary_hardware_design.md"
+                                            >Preliminary Hardware Design
+                                            Guidelines</a
+                                        >. Firmware:
+                                        <a
+                                            class="link"
+                                            href="https://github.com/OSUSat/cubesat/blob/main/documentation/design_guidelines/refactoring_polling_services.md"
+                                            >Event Driven Service Refactors</a
+                                        >
+                                        and
+                                        <a
+                                            class="link"
+                                            href="https://github.com/OSUSat/cubesat/blob/main/documentation/design_guidelines/keeping_the_hal_policy_free.md"
+                                            >Keeping the HAL Policy Free</a
+                                        >. As you work, or before you submit
+                                        changes for review, use the
+                                        <a
+                                            class="link"
+                                            href="https://github.com/OSUSat/cubesat/blob/main/documentation/process/self_review.md"
+                                            >Self Review Log</a
+                                        >.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 items-start">
+                                <div
+                                    class="w-7 h-7 rounded-full border border-slate-700 text-slate-300 font-mono text-xs flex items-center justify-center font-bold flex-shrink-0 mt-0.5 bg-slate-800/40"
+                                >
+                                    4
+                                </div>
+                                <div>
+                                    <h4
+                                        class="font-bold text-sm sm:text-base text-slate-200 mb-1"
+                                    >
+                                        Self-check against the relevant
+                                        checklists
+                                    </h4>
+                                    <p
+                                        class="text-xs sm:text-sm text-slate-400 leading-relaxed"
+                                    >
+                                        Before opening a PR:
+                                        <a
+                                            class="link"
+                                            href="https://github.com/OSUSat/cubesat/blob/main/documentation/checklists/schematic_review.md"
+                                            >Schematic Review Checklist</a
+                                        >
+                                        and/or
+                                        <a
+                                            class="link"
+                                            href="https://github.com/OSUSat/cubesat/blob/main/documentation/checklists/layout_review.md"
+                                            >Layout Review Checklist</a
+                                        >
+                                        for hardware,
+                                        <a
+                                            class="link"
+                                            href="https://github.com/OSUSat/cubesat/blob/main/documentation/checklists/firmware_service.md"
+                                            >Firmware Service</a
+                                        >
+                                        for firmware. Fill them out honestly.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 items-start">
+                                <div
+                                    class="w-7 h-7 rounded-full border border-slate-700 text-slate-300 font-mono text-xs flex items-center justify-center font-bold flex-shrink-0 mt-0.5 bg-slate-800/40"
+                                >
+                                    5
+                                </div>
+                                <div>
+                                    <h4
+                                        class="font-bold text-sm sm:text-base text-slate-200 mb-1"
+                                    >
+                                        Open the PR, get a peer review, merge
+                                    </h4>
+                                    <p
+                                        class="text-xs sm:text-sm text-slate-400 leading-relaxed"
+                                    >
+                                        Delete unused checklist sections from
+                                        the PR template if they aren't
+                                        applicable. Before a merge, always wait
+                                        for CI pipelines to finish. Someone
+                                        other than the author must sign off
+                                        before merging.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="divider opacity-30"></div>
+
+                    <section id="tooling" class="mb-14">
+                        <p class="section-num mb-1">
+                            Section 5: Github Procedures &amp; Pull Requests
+                        </p>
+                        <h2
+                            class="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight mb-3"
+                        >
+                            Using Git &amp; GitHub for Work
+                        </h2>
+
+                        <div
+                            class="space-y-4 text-xs sm:text-sm text-slate-300"
+                        >
+                            <div
+                                class="p-4 rounded-lg bg-[#080c16] border border-slate-800"
+                            >
+                                <h3 class="font-bold text-slate-200 mb-1">
+                                    The project board
+                                </h3>
+                                <p class="text-slate-400 leading-relaxed">
+                                    Open the FlatSat project, find your issue
+                                    (<code class="mono-inline"
+                                        >assignee:you</code
+                                    >), and drag it or change its
+                                    <strong>Status</strong> field in the sidebar
+                                    to one that matches the work's current
+                                    status.
+                                </p>
+                            </div>
+
+                            <div
+                                class="p-4 rounded-lg bg-[#080c16] border border-slate-800"
+                            >
+                                <h3 class="font-bold text-slate-200 mb-1">
+                                    Branches and pull requests
+                                </h3>
+                                <p class="text-slate-400 leading-relaxed mb-2">
+                                    Always create a branch for your work. Pushes
+                                    to main directly are not allowed and are
+                                    enforced automatically. Branch names should
+                                    follow the
+                                    <code class="mono-inline"
+                                        >First-Last/Feature-Name</code
+                                    >
+                                    format.
+                                </p>
+                                <p class="text-slate-400 leading-relaxed mb-2">
+                                    To create a branch, you can use the Project
+                                    UI or the Git CLI.
+                                </p>
+                                <p class="text-slate-400 leading-relaxed mb-2">
+                                    To use the Project UI, first open the issue
+                                    panel. From the issue's sidebar
+                                    <strong>Development</strong> section, click
+                                    <strong>Create a branch</strong>. Push your
+                                    branch, open the PR, and add
+                                    <code class="mono-inline"
+                                        >Closes #&lt;issue&gt;</code
+                                    >
+                                    in the description to auto-link and close
+                                    the issue on merge.
+                                </p>
+                                <p class="text-slate-400 leading-relaxed mb-2">
+                                    If you're using the Git CLI, first run
+                                    <code class="mono-inline"
+                                        >git branch -m
+                                        First-Last/Feature-Name</code
+                                    >. If you need to switch to your branch
+                                    later, run
+                                    <code class="mono-inline"
+                                        >git checkout
+                                        First-Last/Feature-Name</code
+                                    >.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="divider opacity-30"></div>
+
+                    <section id="granularity" class="mb-14">
+                        <p class="section-num mb-1">
+                            Section 6: Task Hierarchy &amp; Sub-Issues
+                        </p>
+                        <h2
+                            class="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight mb-3"
+                        >
+                            Bugs, subtasks &amp; staying readable
+                        </h2>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-6">
+                            The main project view is purposefully broad, mainly
+                            with only one card per subsystem deliverable, so the
+                            board stays quickly readable. More granular issues
+                            like bugs and sub-tasks are also encapsulated in
+                            issues, but a separate project view is used to view
+                            them (the "All Issues" view).
+                        </p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                            <div
+                                class="p-4 rounded-lg bg-[#080c16] border border-slate-800"
+                            >
+                                <h4
+                                    class="font-mono text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1"
+                                >
+                                    Default View: Only Broad Deliverables
+                                </h4>
+                                <p
+                                    class="text-xs text-slate-400 leading-relaxed"
+                                >
+                                    This view removes issues or tasks that have
+                                    a parent issue, so only deliverables appear.
+                                    Deliverables show their sub-task progress so
+                                    you can gague how far along the work is, and
+                                    you can view their sub-issues by clicking on
+                                    the issue panel.
+                                </p>
+                            </div>
+
+                            <div
+                                class="p-4 rounded-lg bg-[#080c16] border border-slate-800"
+                            >
+                                <h4
+                                    class="font-mono text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1"
+                                >
+                                    "All Issues" View: Deliverables &amp;
+                                    Sub-Issues
+                                </h4>
+                                <p
+                                    class="text-xs text-slate-400 leading-relaxed"
+                                >
+                                    This view shows all issues including
+                                    sub-issues. Remember to create sub-issues
+                                    when performing work, as it makes it easier
+                                    to divide work, read, reason about, and
+                                    easier to review.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="divider opacity-30"></div>
+
+                    <section id="branches" class="mb-14">
+                        <p class="section-num mb-1">
+                            Section 7: Branching, Commit &amp; PR Conventions
+                        </p>
+                        <h2
+                            class="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight mb-4"
+                        >
+                            Branch, commit, PR conventions
+                        </h2>
+
+                        <div
+                            class="overflow-x-auto rounded-lg border border-slate-800 mb-4 bg-[#080c16]"
+                        >
+                            <table
+                                class="table table-zebra w-full text-xs sm:text-sm"
+                            >
+                                <thead>
+                                    <tr
+                                        class="bg-[#050810] text-slate-400 border-b border-slate-800"
+                                    >
+                                        <th>What</th>
+                                        <th>Convention</th>
+                                        <th>Example</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="font-bold text-slate-200">
+                                            Branch name
+                                        </td>
+                                        <td>
+                                            <code class="mono-inline"
+                                                >First-Last/Feature-In-Title-Case</code
+                                            >
+                                        </td>
+                                        <td>
+                                            <code class="mono-inline"
+                                                >Ethan-Eggert/Backplane-PCB-Design</code
+                                            >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-bold text-slate-200">
+                                            Commit subject
+                                        </td>
+                                        <td>
+                                            lowercase, imperative, no period
+                                        </td>
+                                        <td>
+                                            <code class="mono-inline"
+                                                >stitching vias</code
+                                            >,
+                                            <code class="mono-inline"
+                                                >repour</code
+                                            >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-bold text-slate-200">
+                                            PR title
+                                        </td>
+                                        <td>
+                                            short sentence, capitalized,
+                                            describes delta
+                                        </td>
+                                        <td>
+                                            "Add hardware design files for
+                                            Backplane PCBs"
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-bold text-slate-200">
+                                            Merge style
+                                        </td>
+                                        <td>
+                                            PRs merge into
+                                            <code class="mono-inline"
+                                                >main</code
+                                            >
+                                            after review
+                                        </td>
+                                        <td>&mdash;</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <div class="divider opacity-30"></div>
+
+                    <section id="docs-system" class="mb-14">
+                        <p class="section-num mb-1">
+                            Section 8: Canonical Documentation Framework
+                        </p>
+                        <h2
+                            class="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight mb-3"
+                        >
+                            The documentation system
+                        </h2>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-6">
+                            Before writing docs, look in
+                            <a
+                                class="link"
+                                href="https://github.com/OSUSat/cubesat/tree/main/documentation/templates"
+                                >documentation/templates/</a
+                            >
+                            for an existing template rather than creating a new
+                            format.
+                        </p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div
+                                class="p-3.5 rounded-lg bg-[#080c16] border border-slate-800 hover:border-slate-600 transition-colors"
+                            >
+                                <h4
+                                    class="font-bold text-sm mb-1 text-slate-200"
+                                >
+                                    Subsystem Info doc
+                                </h4>
+                                <p
+                                    class="text-xs text-slate-400 leading-relaxed mb-2"
+                                >
+                                    One per-subsystem, containing mission
+                                    context, electrical &amp mechanical
+                                    information, functional requirements,
+                                    references, deliverables, and more. You
+                                    should start here if onboarding with a new
+                                    subsystem.
+                                </p>
+                                <p
+                                    class="text-xs text-slate-400 leading-relaxed"
+                                >
+                                    The template can be found
+                                    <a
+                                        class="link"
+                                        href="https://github.com/OSUSat/cubesat/blob/main/documentation/templates/subsystem_info.md"
+                                        >here</a
+                                    >
+                                </p>
+                            </div>
+
+                            <div
+                                class="p-3.5 rounded-lg bg-[#080c16] border border-slate-800 hover:border-slate-600 transition-colors"
+                            >
+                                <h4
+                                    class="font-bold text-sm mb-1 text-slate-200"
+                                >
+                                    ICD: Interface Control Document
+                                </h4>
+                                <p
+                                    class="text-xs text-slate-400 leading-relaxed mb-2"
+                                >
+                                    Used when describing and formalizing an
+                                    interface between two or more subsystems, or
+                                    between a subsystem and an external system
+                                    like the ground. Any time subsystems share
+                                    connectors, data protocols, power rails,
+                                    etc., an ICD formally captures how that
+                                    interface works. Changes to the ICD must
+                                    also be recorded, so consumers know exactly
+                                    when and why a change was made.
+                                </p>
+                                <p
+                                    class="text-xs text-slate-400 leading-relaxed mb-2"
+                                >
+                                    The
+                                    <a
+                                        class="link"
+                                        href="https://github.com/OSUSat/cubesat/blob/main/documentation/icd/backplane_connector_pinout.md"
+                                        >Backplane Pinout ICD</a
+                                    >
+                                    is a good example, as it defines the shared
+                                    pinout and connector interface between every
+                                    subsystem on the satellite.
+                                </p>
+                                <p
+                                    class="text-xs text-slate-400 leading-relaxed mb-2"
+                                >
+                                    The template can be found
+                                    <a
+                                        class="link"
+                                        href="https://github.com/OSUSat/cubesat/blob/main/documentation/templates/icd.md"
+                                        >here</a
+                                    >. The guide for writing an ICD can be found
+                                    <a
+                                        class="link"
+                                        href="https://github.com/OSUSat/cubesat/blob/main/documentation/design_guidelines/writing_icds.md"
+                                        >here</a
+                                    >
+                                </p>
+                            </div>
+
+                            <div
+                                class="p-3.5 rounded-lg bg-[#080c16] border border-slate-800 hover:border-slate-600 transition-colors"
+                            >
+                                <h4
+                                    class="font-bold text-sm mb-1 text-slate-200"
+                                >
+                                    Trade study
+                                </h4>
+                                <p
+                                    class="text-xs text-slate-400 leading-relaxed"
+                                >
+                                    Employed when considering different parts
+                                    for a hardware project. Documents which
+                                    candidates were considered, rationale, and
+                                    more.
+                                </p>
+                            </div>
+
+                            <div
+                                class="p-3.5 rounded-lg bg-[#080c16] border border-slate-800 hover:border-slate-600 transition-colors"
+                            >
+                                <h4
+                                    class="font-bold text-sm mb-1 text-slate-200"
+                                >
+                                    ATP: Acceptance Test Procedure
+                                </h4>
+                                <p
+                                    class="text-xs text-slate-400 leading-relaxed mb-2"
+                                >
+                                    Used when bringing up and validating
+                                    hardware. Used to verify that specific
+                                    hardware units meet requirements before
+                                    being accepted into the next phase of
+                                    integration.
+                                </p>
+                                <p
+                                    class="text-xs text-slate-400 leading-relaxed mb-2"
+                                >
+                                    The template can be found
+                                    <a
+                                        class="link"
+                                        href="https://github.com/OSUSat/cubesat/blob/main/documentation/templates/atp.md"
+                                        >here</a
+                                    >. The guide for writing an ATP can be found
+                                    <a
+                                        class="link"
+                                        href="https://github.com/OSUSat/cubesat/blob/main/documentation/design_guidelines/writing_atps.md"
+                                        >here</a
+                                    >
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="divider opacity-30"></div>
+
+                    <section id="hardware" class="mb-14">
+                        <p class="section-num mb-1">
+                            Section 9: Hardware Design Specifications
+                        </p>
+                        <h2
+                            class="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight mb-4"
+                        >
+                            Hardware-specific notes
+                        </h2>
+
+                        <div
+                            class="p-4 rounded-lg bg-[#080c16] border border-slate-800 mb-2"
+                        >
+                            <h4
+                                class="font-bold text-slate-200 text-sm sm:text-base mb-1"
+                            >
+                                KiCad Hardware Templates
+                            </h4>
+                            <p class="text-slate-400 leading-relaxed">
+                                When creating new hardware designs, you can
+                                create the KiCad project using the daughterboard
+                                template available in the repo, which is already
+                                set up with the board outline, connectors,
+                                design rules, and schematic organization that
+                                you need to get started. The README contains
+                                information about setting up the KiCad template.
+                            </p>
+                        </div>
+
+                        <div
+                            class="p-4 rounded-lg bg-[#080c16] border border-slate-800 mb-2"
+                        >
+                            <h4
+                                class="font-bold text-slate-200 text-sm sm:text-base mb-1"
+                            >
+                                Design Guidelines
+                            </h4>
+                            <p class="text-slate-400 leading-relaxed">
+                                Design guidelines must be followed when making
+                                hardware changes. Preliminary hardware design
+                                guidelines can be found
+                                <a
+                                    class="link"
+                                    href="https://github.com/OSUSat/cubesat/blob/main/documentation/design_guidelines/preliminary_hardware_design.md"
+                                    >here</a
+                                >, and schematic &amp; layout guidelines can be
+                                found
+                                <a
+                                    class="link"
+                                    href="https://github.com/OSUSat/cubesat/blob/main/documentation/design_guidelines/schematic_layout_design.md"
+                                    >here</a
+                                >
+                            </p>
+                        </div>
+
+                        <div class="space-y-4 text-xs sm:text-sm">
+                            <div
+                                class="p-4 rounded-lg bg-[#080c16] border border-slate-800"
+                            >
+                                <h4
+                                    class="font-bold text-slate-200 text-sm sm:text-base mb-1"
+                                >
+                                    Shared footprint libraries
+                                </h4>
+                                <p class="text-slate-400 leading-relaxed">
+                                    KiCad libraries are shared across every
+                                    board design. They are found in
+                                    <a
+                                        class="link"
+                                        href="https://github.com/OSUSat/cubesat/tree/Ethan-Eggert/Backplane-PCB-Design/shared/kicad"
+                                        >shared/kicad/footprints/</a
+                                    >. Add new footprints, symbols, and models
+                                    to the shared libraries, not the local ones.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="divider opacity-30"></div>
+
+                    <section id="firmware" class="mb-14">
+                        <p class="section-num mb-1">
+                            Section 10: Firmware &amp; Hal Design Guidelines
+                        </p>
+                        <h2
+                            class="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight mb-4"
+                        >
+                            Firmware-specific notes
+                        </h2>
+
+                        <div class="space-y-4 text-xs sm:text-sm">
+                            <div
+                                class="p-4 rounded-lg bg-[#080c16] border border-slate-800 mb-2"
+                            >
+                                <h4
+                                    class="font-bold text-slate-200 text-sm sm:text-base mb-1"
+                                >
+                                    Design Guidelines
+                                </h4>
+                                <p class="text-slate-400 leading-relaxed">
+                                    Design guidelines must be followed when
+                                    making firmware changes. Information about
+                                    event driven services can be found
+                                    <a
+                                        class="link"
+                                        href="https://github.com/OSUSat/cubesat/blob/main/documentation/design_guidelines/refactoring_polling_services.md"
+                                        >here</a
+                                    >, and rules around HAL design can be found
+                                    <a
+                                        class="link"
+                                        href="https://github.com/OSUSat/cubesat/blob/main/documentation/design_guidelines/keeping_the_hal_policy_free.md"
+                                        >here</a
+                                    >
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="divider opacity-30"></div>
+
+                    <section id="help" class="mb-12">
+                        <p class="section-num mb-1">
+                            Section 11: Technical Support &amp; Contacts
+                        </p>
+                        <h2
+                            class="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight mb-4"
+                        >
+                            Getting unstuck
+                        </h2>
+
+                        <ul
+                            class="list-disc pl-5 space-y-2 text-xs sm:text-sm text-slate-300"
+                        >
+                            <li>
+                                <strong>Scope or requirement questions</strong>
+                                &mdash; check the subsystem
+                                <code class="mono-inline"
+                                    >documentation/subsystem_info.md</code
+                                >
+                                document.
+                            </li>
+                            <li>
+                                <strong>Architecture questions</strong> &mdash;
+                                ask in <em>Open questions / risks</em> on your
+                                Design Review issue.
+                            </li>
+                            <li>
+                                <strong>Reviewer assignment</strong> &mdash; tag
+                                <code class="mono-inline"
+                                    >@OSUSat/osusat-reviewers</code
+                                >.
+                            </li>
+                            <li>
+                                <strong>Getting Help</strong>
+                                &mdash; create a forum post in the #help channel
+                                in Discord
+                            </li>
+                        </ul>
+                    </section>
+                </main>
+
+                <!-- Footer -->
+                <footer
+                    class="footer footer-center p-6 text-slate-500 border-t border-[#161e33] bg-[#080c16]"
+                >
+                    <div>
+                        <p class="text-xs font-mono">
+                            OSUSat Program &middot; Open Source Aerospace
+                        </p>
+                    </div>
+                </footer>
+            </div>
+
+            <!-- Sidebar Table of Contents -->
+            <div class="drawer-side z-40">
+                <label
+                    for="toc-drawer"
+                    aria-label="close sidebar"
+                    class="drawer-overlay"
+                ></label>
+                <aside
+                    class="bg-[#080c16] min-h-full w-72 p-4 border-r border-[#161e33] flex flex-col justify-between"
+                >
+                    <div>
+                        <div
+                            class="flex items-center justify-between px-2 mb-3 pb-2 border-b border-slate-800"
+                        >
+                            <span
+                                class="font-mono text-xs uppercase tracking-widest text-slate-400 font-bold"
+                                >Document Index</span
+                            >
+                        </div>
+
+                        <!-- Quick Filter Input -->
+                        <div class="px-2 mb-4">
+                            <input
+                                type="text"
+                                id="toc-search"
+                                placeholder="Filter sections..."
+                                class="input input-xs input-bordered w-full font-mono text-xs bg-[#050711] border-slate-800 text-slate-200"
+                            />
+                        </div>
+
+                        <nav id="toc-nav" class="space-y-0.5 text-xs font-mono">
+                            <a
+                                href="#orient"
+                                class="toc-link flex items-center py-1.5 px-2 rounded-md hover:bg-slate-800/40 text-slate-400 transition-colors"
+                            >
+                                <span class="text-slate-600 w-6">01</span>
+                                <span>Orientation</span>
+                            </a>
+                            <a
+                                href="#setup"
+                                class="toc-link flex items-center py-1.5 px-2 rounded-md hover:bg-slate-800/40 text-slate-400 transition-colors"
+                            >
+                                <span class="text-slate-600 w-6">02</span>
+                                <span>Toolchain Setup</span>
+                            </a>
+                            <a
+                                href="#find-work"
+                                class="toc-link flex items-center py-1.5 px-2 rounded-md hover:bg-slate-800/40 text-slate-400 transition-colors"
+                            >
+                                <span class="text-slate-600 w-6">03</span>
+                                <span>Issue Pipeline</span>
+                            </a>
+                            <a
+                                href="#lifecycle"
+                                class="toc-link flex items-center py-1.5 px-2 rounded-md hover:bg-slate-800/40 text-slate-400 transition-colors"
+                            >
+                                <span class="text-slate-600 w-6">04</span>
+                                <span>5-Gate Lifecycle</span>
+                            </a>
+                            <a
+                                href="#tooling"
+                                class="toc-link flex items-center py-1.5 px-2 rounded-md hover:bg-slate-800/40 text-slate-400 transition-colors"
+                            >
+                                <span class="text-slate-600 w-6">05</span>
+                                <span>GitHub Procedures</span>
+                            </a>
+                            <a
+                                href="#granularity"
+                                class="toc-link flex items-center py-1.5 px-2 rounded-md hover:bg-slate-800/40 text-slate-400 transition-colors"
+                            >
+                                <span class="text-slate-600 w-6">06</span>
+                                <span>Task Hierarchy</span>
+                            </a>
+                            <a
+                                href="#branches"
+                                class="toc-link flex items-center py-1.5 px-2 rounded-md hover:bg-slate-800/40 text-slate-400 transition-colors"
+                            >
+                                <span class="text-slate-600 w-6">07</span>
+                                <span>Branch Rules</span>
+                            </a>
+                            <a
+                                href="#docs-system"
+                                class="toc-link flex items-center py-1.5 px-2 rounded-md hover:bg-slate-800/40 text-slate-400 transition-colors"
+                            >
+                                <span class="text-slate-600 w-6">08</span>
+                                <span>Doc System</span>
+                            </a>
+                            <a
+                                href="#hardware"
+                                class="toc-link flex items-center py-1.5 px-2 rounded-md hover:bg-slate-800/40 text-slate-400 transition-colors"
+                            >
+                                <span class="text-slate-600 w-6">09</span>
+                                <span>Hardware Specs</span>
+                            </a>
+                            <a
+                                href="#firmware"
+                                class="toc-link flex items-center py-1.5 px-2 rounded-md hover:bg-slate-800/40 text-slate-400 transition-colors"
+                            >
+                                <span class="text-slate-600 w-6">10</span>
+                                <span>Firmware Guidelines</span>
+                            </a>
+                            <a
+                                href="#help"
+                                class="toc-link flex items-center py-1.5 px-2 rounded-md hover:bg-slate-800/40 text-slate-400 transition-colors"
+                            >
+                                <span class="text-slate-600 w-6">11</span>
+                                <span>Technical Support</span>
+                            </a>
+                        </nav>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-800">
+                        <a
+                            href="../index.html"
+                            class="btn btn-ghost btn-xs w-full justify-start gap-2 font-mono text-slate-400"
+                        >
+                            <span>&larr;</span>
+                            <span>Back to Wiki home</span>
+                        </a>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+        <script src="../assets/theme.js"></script>
+        <script>
+            // Reading Progress Bar & ScrollSpy
+            document.addEventListener("DOMContentLoaded", function () {
+                var progressBar = document.getElementById(
+                    "scroll-progress-bar",
+                );
+                var sections = document.querySelectorAll("section[id]");
+                var tocLinks = document.querySelectorAll(".toc-link");
+                var searchInput = document.getElementById("toc-search");
+
+                window.addEventListener("scroll", function () {
+                    var winScroll =
+                        document.documentElement.scrollTop ||
+                        document.body.scrollTop;
+                    var height =
+                        document.documentElement.scrollHeight -
+                        document.documentElement.clientHeight;
+                    var scrolled = (winScroll / height) * 100;
+                    if (progressBar) progressBar.style.width = scrolled + "%";
+
+                    var current = "";
+                    sections.forEach(function (section) {
+                        var sectionTop = section.offsetTop - 120;
+                        if (winScroll >= sectionTop) {
+                            current = section.getAttribute("id");
+                        }
+                    });
+
+                    tocLinks.forEach(function (link) {
+                        link.classList.remove("active");
+                        if (link.getAttribute("href") === "#" + current) {
+                            link.classList.add("active");
+                        }
+                    });
+                });
+
+                // Quick Search Filter for Sidebar
+                if (searchInput) {
+                    searchInput.addEventListener("input", function (e) {
+                        var query = e.target.value.toLowerCase();
+                        tocLinks.forEach(function (link) {
+                            var text = link.textContent.toLowerCase();
+                            if (text.includes(query)) {
+                                link.style.display = "flex";
+                            } else {
+                                link.style.display = "none";
+                            }
+                        });
+                    });
+                }
+
+                // Add copy button functionality to code blocks
+                var terminalFrames =
+                    document.querySelectorAll(".terminal-frame");
+                terminalFrames.forEach(function (frame) {
+                    var header = frame.querySelector(".terminal-header");
+                    var pre = frame.querySelector("pre");
+                    if (header && pre) {
+                        var copyBtn = document.createElement("button");
+                        copyBtn.className =
+                            "btn btn-xs btn-ghost text-slate-400 hover:text-slate-200 font-mono text-[10px]";
+                        copyBtn.innerHTML = "copy";
+                        copyBtn.addEventListener("click", function () {
+                            var textToCopy = pre.textContent.replace(
+                                /^\$\s/gm,
+                                "",
+                            );
+                            navigator.clipboard
+                                .writeText(textToCopy)
+                                .then(function () {
+                                    copyBtn.innerHTML = "copied!";
+                                    setTimeout(function () {
+                                        copyBtn.innerHTML = "copy";
+                                    }, 2000);
+                                });
+                        });
+                        header.appendChild(copyBtn);
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
