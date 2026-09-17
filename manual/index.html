@@ -251,7 +251,7 @@
                                 </div>
                             </a>
                             <a
-                                href="#setup"
+                                href="#onboarding"
                                 class="doc-card p-2.5 rounded-lg hover:border-slate-600 transition-all text-left"
                             >
                                 <div
@@ -262,7 +262,22 @@
                                 <div
                                     class="text-xs font-semibold text-slate-200"
                                 >
-                                    Clone & Build
+                                    GitHub Access
+                                </div>
+                            </a>
+                            <a
+                                href="#setup"
+                                class="doc-card p-2.5 rounded-lg hover:border-slate-600 transition-all text-left"
+                            >
+                                <div
+                                    class="text-[10px] font-mono text-slate-500 mb-0.5"
+                                >
+                                    Section 3
+                                </div>
+                                <div
+                                    class="text-xs font-semibold text-slate-200"
+                                >
+                                    Clone &amp; Build
                                 </div>
                             </a>
                             <a
@@ -272,27 +287,12 @@
                                 <div
                                     class="text-[10px] font-mono text-slate-500 mb-0.5"
                                 >
-                                    Section 4
+                                    Section 5
                                 </div>
                                 <div
                                     class="text-xs font-semibold text-slate-200"
                                 >
                                     Design Reviews
-                                </div>
-                            </a>
-                            <a
-                                href="#hardware"
-                                class="doc-card p-2.5 rounded-lg hover:border-slate-600 transition-all text-left"
-                            >
-                                <div
-                                    class="text-[10px] font-mono text-slate-500 mb-0.5"
-                                >
-                                    Section 9
-                                </div>
-                                <div
-                                    class="text-xs font-semibold text-slate-200"
-                                >
-                                    HW & FW Specs
                                 </div>
                             </a>
                         </div>
@@ -447,9 +447,310 @@ documentation/
 
                     <div class="divider opacity-30"></div>
 
+                    <section id="onboarding" class="mb-14">
+                        <p class="section-num mb-1">
+                            Section 2: Onboarding &amp; GitHub Access
+                        </p>
+                        <h2
+                            class="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight mb-4"
+                        >
+                            Getting access &amp; joining the OSUSat GitHub
+                            Organization
+                        </h2>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-6">
+                            All OSUSat CubeSat development takes place in the
+                            <a
+                                href="https://github.com/OSUSat"
+                                target="_blank"
+                                rel="noopener"
+                                class="link font-medium text-slate-200 underline"
+                                >@OSUSat GitHub Organization</a
+                            >. Gaining organization access is required to submit
+                            pull requests and work with issues on the GitHub
+                            project board.
+                        </p>
+
+                        <div class="space-y-6">
+                            <div class="flex gap-4 items-start">
+                                <div
+                                    class="w-7 h-7 rounded-full border border-slate-700 text-slate-300 font-mono text-xs flex items-center justify-center font-bold flex-shrink-0 mt-0.5 bg-slate-800/40"
+                                >
+                                    1
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h4
+                                        class="font-bold text-sm sm:text-base text-slate-200 mb-1"
+                                    >
+                                        Discord &amp; Profile Setup
+                                    </h4>
+                                    <p
+                                        class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-2"
+                                    >
+                                        Join the OSUSat team Discord server,
+                                        select the role that most closely meets
+                                        your experience/major, and update your
+                                        server nickname to follow this format:
+                                        <code class="mono-inline"
+                                            >FirstName LastName
+                                        </code>
+                                        . Introduce yourself in the
+                                        <code class="mono-inline"
+                                            >#general</code
+                                        >
+                                        channel with your GitHub username,
+                                        target subsystem, and brief relevant
+                                        experience.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 items-start">
+                                <div
+                                    class="w-7 h-7 rounded-full border border-slate-700 text-slate-300 font-mono text-xs flex items-center justify-center font-bold flex-shrink-0 mt-0.5 bg-slate-800/40"
+                                >
+                                    2
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h4
+                                        class="font-bold text-sm sm:text-base text-slate-200 mb-1"
+                                    >
+                                        Request &amp; Accept Organization
+                                        Invitation
+                                    </h4>
+                                    <p
+                                        class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-2"
+                                    >
+                                        Post your GitHub handle in
+                                        <code class="mono-inline">#general</code
+                                        >. Once an invite is sent, accept it at
+                                        <a
+                                            href="https://github.com/OSUSat"
+                                            target="_blank"
+                                            rel="noopener"
+                                            class="link text-slate-300 underline"
+                                            >github.com/OSUSat</a
+                                        >
+                                        or via the confirmation email.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 items-start">
+                                <div
+                                    class="w-7 h-7 rounded-full border border-slate-700 text-slate-300 font-mono text-xs flex items-center justify-center font-bold flex-shrink-0 mt-0.5 bg-slate-800/40"
+                                >
+                                    3
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h4
+                                        class="font-bold text-sm sm:text-base text-slate-200 mb-1"
+                                    >
+                                        Set up a Git Client (GUI or Command
+                                        Line)
+                                    </h4>
+                                    <p
+                                        class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-3"
+                                    >
+                                        You will need a Git client to clone the
+                                        repository, track changes, create
+                                        branches, and push code or hardware
+                                        designs. Hardware engineers and members
+                                        new to version control are encouraged to
+                                        use a graphical desktop client, while
+                                        comfortable command-line users can use
+                                        the standard Git CLI.
+                                    </p>
+
+                                    <!-- GUI vs CLI Grid -->
+                                    <div
+                                        class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-2"
+                                    >
+                                        <!-- GUI Option -->
+                                        <div
+                                            class="p-3.5 rounded-lg bg-[#080c16] border border-slate-800"
+                                        >
+                                            <div
+                                                class="flex items-center gap-2 mb-1.5"
+                                            >
+                                                <span
+                                                    class="badge badge-sm badge-ghost font-mono text-[10px] text-slate-300 border-slate-700"
+                                                    >Best if New</span
+                                                >
+                                                <h5
+                                                    class="font-bold text-xs text-slate-200"
+                                                >
+                                                    Graphical Clients (GUI)
+                                                </h5>
+                                            </div>
+                                            <p
+                                                class="text-xs text-slate-400 leading-relaxed mb-2.5"
+                                            >
+                                                If you're new, graphical Git
+                                                clients simplify cloning,
+                                                committing, viewing diffs, and
+                                                managing branches visually
+                                                without needing terminal
+                                                commands.
+                                            </p>
+                                            <ul
+                                                class="space-y-1.5 text-xs text-slate-300 mb-3"
+                                            >
+                                                <li
+                                                    class="flex items-center justify-between"
+                                                >
+                                                    <span
+                                                        >GitHub Desktop
+                                                        <span
+                                                            class="badge badge-sm badge-ghost font-mono text-[10px] text-slate-300 border-slate-700"
+                                                            >Recommended</span
+                                                        ></span
+                                                    >
+                                                    <a
+                                                        href="https://desktop.github.com/"
+                                                        target="_blank"
+                                                        rel="noopener"
+                                                        class="link text-sky-400 hover:underline text-[11px] font-mono"
+                                                        >Download &rarr;</a
+                                                    >
+                                                </li>
+                                                <li
+                                                    class="flex items-center justify-between"
+                                                >
+                                                    <span>GitKraken</span>
+                                                    <a
+                                                        href="https://www.gitkraken.com/"
+                                                        target="_blank"
+                                                        rel="noopener"
+                                                        class="link text-sky-400 hover:underline text-[11px] font-mono"
+                                                        >Download &rarr;</a
+                                                    >
+                                                </li>
+                                                <li
+                                                    class="flex items-center justify-between"
+                                                >
+                                                    <span
+                                                        >VS Code Source
+                                                        Control</span
+                                                    >
+                                                    <a
+                                                        href="https://code.visualstudio.com/"
+                                                        target="_blank"
+                                                        rel="noopener"
+                                                        class="link text-sky-400 hover:underline text-[11px] font-mono"
+                                                        >Download &rarr;</a
+                                                    >
+                                                </li>
+                                            </ul>
+                                            <div
+                                                class="pt-2.5 border-t border-slate-800/80"
+                                            >
+                                                <span
+                                                    class="text-[11px] font-semibold text-slate-300 block mb-1"
+                                                    >Beginner Guides &amp;
+                                                    Articles:</span
+                                                >
+                                                <ul
+                                                    class="space-y-1 text-[11px]"
+                                                >
+                                                    <li>
+                                                        <a
+                                                            href="https://docs.github.com/en/desktop/overview/getting-started-with-github-desktop"
+                                                            target="_blank"
+                                                            rel="noopener"
+                                                            class="link text-slate-400 hover:text-slate-200 underline"
+                                                            >GitHub Desktop
+                                                            Quickstart Guide</a
+                                                        >
+                                                    </li>
+                                                    <li>
+                                                        <a
+                                                            href="https://docs.github.com/en/get-started/start-your-journey/about-github-and-git"
+                                                            target="_blank"
+                                                            rel="noopener"
+                                                            class="link text-slate-400 hover:text-slate-200 underline"
+                                                            >Introduction to Git
+                                                            &amp; GitHub
+                                                            Essentials</a
+                                                        >
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <!-- CLI Option -->
+                                        <div
+                                            class="p-3.5 rounded-lg bg-[#080c16] border border-slate-800"
+                                        >
+                                            <div
+                                                class="flex items-center gap-2 mb-1.5"
+                                            >
+                                                <span
+                                                    class="badge badge-sm badge-ghost font-mono text-[10px] text-slate-300 border-slate-700"
+                                                    >Terminal / CLI</span
+                                                >
+                                                <h5
+                                                    class="font-bold text-xs text-slate-200"
+                                                >
+                                                    Command Line Interface
+                                                </h5>
+                                            </div>
+                                            <p
+                                                class="text-xs text-slate-400 leading-relaxed mb-2"
+                                            >
+                                                Install standard Git from
+                                                <a
+                                                    href="https://git-scm.com/"
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                    class="link text-slate-300 underline"
+                                                    >git-scm.com</a
+                                                >
+                                                or your package manager (<code
+                                                    class="mono-inline"
+                                                    >sudo apt install git</code
+                                                >
+                                                /
+                                                <code class="mono-inline"
+                                                    >brew install git</code
+                                                >).
+                                            </p>
+                                            <p
+                                                class="text-xs text-slate-400 leading-relaxed mb-2"
+                                            >
+                                                Set up your SSH key to
+                                                authenticate yourself easily:
+                                            </p>
+                                            <div class="terminal-frame my-0">
+                                                <div class="terminal-header">
+                                                    <span
+                                                        >bash &mdash; SSH
+                                                        setup</span
+                                                    >
+                                                </div>
+                                                <pre
+                                                    class="p-2.5 text-[11px] font-mono text-slate-300 max-h-40 overflow-auto"
+                                                ><span class="text-slate-500 font-bold">$</span> ssh-keygen -t ed25519 -C "your_email@domain.com"
+<span class="text-slate-500 font-bold">$</span> eval "$(ssh-agent -s)"
+<span class="text-slate-500 font-bold">$</span> ssh-add ~/.ssh/id_ed25519
+
+<span class="text-slate-600"># copy public key to GitHub (Settings -> SSH keys):</span>
+<span class="text-slate-500 font-bold">$</span> cat ~/.ssh/id_ed25519.pub
+
+<span class="text-slate-600"># test connection to GitHub:</span>
+<span class="text-slate-500 font-bold">$</span> ssh -T git@github.com</pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="divider opacity-30"></div>
+
                     <section id="setup" class="mb-14">
                         <p class="section-num mb-1">
-                            Section 2: Toolchain Setup &amp; Build Verification
+                            Section 3: Toolchain Setup &amp; Build Verification
                         </p>
                         <h2
                             class="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight mb-4"
@@ -616,7 +917,7 @@ documentation/
 
                     <section id="find-work" class="mb-14">
                         <p class="section-num mb-1">
-                            Section 3: Issue Tracking &amp; Flatsat GitHub
+                            Section 4: Issue Tracking &amp; Flatsat GitHub
                             Project
                         </p>
                         <h2
@@ -682,7 +983,7 @@ documentation/
 
                     <section id="lifecycle" class="mb-14">
                         <p class="section-num mb-1">
-                            Section 4: The Lifecycle of Work
+                            Section 5: The Lifecycle of Work
                         </p>
                         <h2
                             class="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight mb-3"
@@ -875,7 +1176,7 @@ documentation/
 
                     <section id="tooling" class="mb-14">
                         <p class="section-num mb-1">
-                            Section 5: Github Procedures &amp; Pull Requests
+                            Section 6: Github Procedures &amp; Pull Requests
                         </p>
                         <h2
                             class="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight mb-3"
@@ -955,7 +1256,7 @@ documentation/
 
                     <section id="granularity" class="mb-14">
                         <p class="section-num mb-1">
-                            Section 6: Task Hierarchy &amp; Sub-Issues
+                            Section 7: Task Hierarchy &amp; Sub-Issues
                         </p>
                         <h2
                             class="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight mb-3"
@@ -1018,7 +1319,7 @@ documentation/
 
                     <section id="branches" class="mb-14">
                         <p class="section-num mb-1">
-                            Section 7: Branching, Commit &amp; PR Conventions
+                            Section 8: Branching, Commit &amp; PR Conventions
                         </p>
                         <h2
                             class="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight mb-4"
@@ -1108,7 +1409,7 @@ documentation/
 
                     <section id="docs-system" class="mb-14">
                         <p class="section-num mb-1">
-                            Section 8: Canonical Documentation Framework
+                            Section 9: Canonical Documentation Framework
                         </p>
                         <h2
                             class="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight mb-3"
@@ -1266,7 +1567,7 @@ documentation/
 
                     <section id="hardware" class="mb-14">
                         <p class="section-num mb-1">
-                            Section 9: Hardware Design Specifications
+                            Section 10: Hardware Design Specifications
                         </p>
                         <h2
                             class="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight mb-4"
@@ -1346,7 +1647,7 @@ documentation/
 
                     <section id="firmware" class="mb-14">
                         <p class="section-num mb-1">
-                            Section 10: Firmware &amp; Hal Design Guidelines
+                            Section 11: Firmware &amp; Hal Design Guidelines
                         </p>
                         <h2
                             class="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight mb-4"
@@ -1389,16 +1690,20 @@ documentation/
                                     Auto-Generated Firmware Documentation
                                 </h4>
                                 <p class="text-slate-400 leading-relaxed mb-3">
-                                    Sphinx documentation for subsystem firmware is automatically generated:
+                                    Sphinx documentation for subsystem firmware
+                                    is automatically generated:
                                 </p>
-                                <ul class="list-disc pl-5 space-y-1 text-slate-300">
+                                <ul
+                                    class="list-disc pl-5 space-y-1 text-slate-300"
+                                >
                                     <li>
                                         <a
                                             class="link text-sky-400 hover:underline"
                                             href="https://osusat.github.io/cubesat/eps/v1/sphinx/index.html"
                                             target="_blank"
                                             rel="noopener"
-                                            >EPS v1 Sphinx Documentation &rarr;</a
+                                            >EPS v1 Sphinx Documentation
+                                            &rarr;</a
                                         >
                                     </li>
                                     <li>
@@ -1407,7 +1712,8 @@ documentation/
                                             href="https://osusat.github.io/cubesat/obc/v1/sphinx/index.html"
                                             target="_blank"
                                             rel="noopener"
-                                            >OBC v1 Sphinx Documentation &rarr;</a
+                                            >OBC v1 Sphinx Documentation
+                                            &rarr;</a
                                         >
                                     </li>
                                 </ul>
@@ -1419,7 +1725,7 @@ documentation/
 
                     <section id="help" class="mb-12">
                         <p class="section-num mb-1">
-                            Section 11: Technical Support &amp; Contacts
+                            Section 12: Technical Support &amp; Contacts
                         </p>
                         <h2
                             class="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight mb-4"
@@ -1509,73 +1815,80 @@ documentation/
                                 <span>Orientation</span>
                             </a>
                             <a
-                                href="#setup"
+                                href="#onboarding"
                                 class="toc-link flex items-center py-1.5 px-2 rounded-md hover:bg-slate-800/40 text-slate-400 transition-colors"
                             >
                                 <span class="text-slate-600 w-6">02</span>
+                                <span>GitHub Onboarding</span>
+                            </a>
+                            <a
+                                href="#setup"
+                                class="toc-link flex items-center py-1.5 px-2 rounded-md hover:bg-slate-800/40 text-slate-400 transition-colors"
+                            >
+                                <span class="text-slate-600 w-6">03</span>
                                 <span>Toolchain Setup</span>
                             </a>
                             <a
                                 href="#find-work"
                                 class="toc-link flex items-center py-1.5 px-2 rounded-md hover:bg-slate-800/40 text-slate-400 transition-colors"
                             >
-                                <span class="text-slate-600 w-6">03</span>
+                                <span class="text-slate-600 w-6">04</span>
                                 <span>Issue Pipeline</span>
                             </a>
                             <a
                                 href="#lifecycle"
                                 class="toc-link flex items-center py-1.5 px-2 rounded-md hover:bg-slate-800/40 text-slate-400 transition-colors"
                             >
-                                <span class="text-slate-600 w-6">04</span>
+                                <span class="text-slate-600 w-6">05</span>
                                 <span>5-Gate Lifecycle</span>
                             </a>
                             <a
                                 href="#tooling"
                                 class="toc-link flex items-center py-1.5 px-2 rounded-md hover:bg-slate-800/40 text-slate-400 transition-colors"
                             >
-                                <span class="text-slate-600 w-6">05</span>
+                                <span class="text-slate-600 w-6">06</span>
                                 <span>GitHub Procedures</span>
                             </a>
                             <a
                                 href="#granularity"
                                 class="toc-link flex items-center py-1.5 px-2 rounded-md hover:bg-slate-800/40 text-slate-400 transition-colors"
                             >
-                                <span class="text-slate-600 w-6">06</span>
+                                <span class="text-slate-600 w-6">07</span>
                                 <span>Task Hierarchy</span>
                             </a>
                             <a
                                 href="#branches"
                                 class="toc-link flex items-center py-1.5 px-2 rounded-md hover:bg-slate-800/40 text-slate-400 transition-colors"
                             >
-                                <span class="text-slate-600 w-6">07</span>
+                                <span class="text-slate-600 w-6">08</span>
                                 <span>Branch Rules</span>
                             </a>
                             <a
                                 href="#docs-system"
                                 class="toc-link flex items-center py-1.5 px-2 rounded-md hover:bg-slate-800/40 text-slate-400 transition-colors"
                             >
-                                <span class="text-slate-600 w-6">08</span>
+                                <span class="text-slate-600 w-6">09</span>
                                 <span>Doc System</span>
                             </a>
                             <a
                                 href="#hardware"
                                 class="toc-link flex items-center py-1.5 px-2 rounded-md hover:bg-slate-800/40 text-slate-400 transition-colors"
                             >
-                                <span class="text-slate-600 w-6">09</span>
+                                <span class="text-slate-600 w-6">10</span>
                                 <span>Hardware Specs</span>
                             </a>
                             <a
                                 href="#firmware"
                                 class="toc-link flex items-center py-1.5 px-2 rounded-md hover:bg-slate-800/40 text-slate-400 transition-colors"
                             >
-                                <span class="text-slate-600 w-6">10</span>
+                                <span class="text-slate-600 w-6">11</span>
                                 <span>Firmware Guidelines</span>
                             </a>
                             <a
                                 href="#help"
                                 class="toc-link flex items-center py-1.5 px-2 rounded-md hover:bg-slate-800/40 text-slate-400 transition-colors"
                             >
-                                <span class="text-slate-600 w-6">11</span>
+                                <span class="text-slate-600 w-6">12</span>
                                 <span>Technical Support</span>
                             </a>
                         </nav>
